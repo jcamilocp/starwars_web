@@ -1,26 +1,28 @@
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
-
-const info = {
-  name: "Tierra",
-  diameter: "Some kilometers",
-  rotation_period: "Some days",
-  orbital_period: "Some years",
-  gravity: "A number",
-  population: "A big number",
-  climate: "Kinda good",
-  terrain: "Bit complex",
-  surface_water: "A couple, yes"
-};
-
+import { useAuth } from "../components/auth";
+import { planets } from "../requests/client";
 
 const Planets = () => {
+  const [planetList, setPlanetList] = useState([]);
+  const auth = useAuth();
+
+  useEffect(() => {
+    planets(auth.token)
+      .then((response) => {
+        if(response.status === 200){
+          setPlanetList(response.data.planets)
+        }
+      });
+  })
+
   return (
     <div className="w-full px-16">
-      <div className="text-center text-4xl">Planets</div>
-      <div className="py-4 flex items-center w-full gap-3">
-        <Card title={info.name} info={info} ></Card>
-        <Card title={info.name} info={info} ></Card>
-        <Card title={info.name} info={info} ></Card>
+      <div className="text-center text-4xl text-white pt-4">Planets</div>
+      <div className="py-4 flex flex-wrap items-center w-full">
+        {
+          planetList.map((planet) => <Card key={planet.id} title={planet.name} info={planet} ></Card>)
+        }
       </div>
     </div>
   );
