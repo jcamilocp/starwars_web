@@ -1,0 +1,7 @@
+{
+  "home": "/",
+  "login": "/login",
+  "planets": "/planets",
+  "people": "/people",
+  "films": "/films"
+}
