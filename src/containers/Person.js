@@ -33,8 +33,8 @@ const Person = () => {
 
   return (
     <>
-      <div className="text-2xl text-white">{`People: ${person.name}`}</div>
-      <div className="flex w-full items-center">
+      <div className="mt-6 text-2xl text-white">{`Person: ${person.name}`}</div>
+      <div className="flex w-full px-8 items-center">
         <Card title="Details" info={person} fatherClass="w-1/2 text-center" />
         {person.planet &&
           <Card title="Planet" info={person.planet} fatherClass="w-1/2 text-center" />
@@ -42,7 +42,7 @@ const Person = () => {
       </div>
       <div>
       <div className="text-xl text-white text-center py-6">Films:</div>
-        <div className="flex flex-wrap w-full">
+        <div className="flex flex-wrap px-8 w-full">
           <CardList resourceList={filmList} fatherClass="w-1/2" resourceName="films" />
         </div>
       </div>

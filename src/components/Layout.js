@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useAuth } from "./auth";
+import background from "../assets/images/background.png"
 
 const Layout = ({children}) => {
   const auth = useAuth();
@@ -19,7 +20,7 @@ const Layout = ({children}) => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-16 w-full min-h-screen h-full bg-slate-600">
+    <div className="flex flex-col items-center mt-16 w-full min-h-screen h-full bg-cover bg-no-repeat" style={{ backgroundImage: `url(${background})` }}>
       {children}
       {
         auth.message.text &&

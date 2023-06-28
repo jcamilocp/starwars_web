@@ -1,6 +1,6 @@
 
 import RouterConfig from '../router/routerConfig';
-import '../assets/App.css';
+import '../assets/css/App.css';
 
 const App = () => {
   return (

@@ -17,7 +17,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="bg-white sm:w-1/2 lg:w-1/3 py-16 my-14 content-center">
+    <div className="bg-white sm:w-1/2 lg:w-1/3 py-16 my-14 content-center rounded">
       <div className="py-8 font-bold text-2xl text-center w-full">Sign Up</div>
       <form onSubmit={handleSubmit} >
         <div className="flex flex-col">

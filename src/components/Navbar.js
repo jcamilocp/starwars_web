@@ -1,5 +1,6 @@
 import NavItem from "./NavItem"
 import { useAuth } from "./auth"
+import logo from "../assets/images/logo.svg"
 
 const Navbar = () => {
 
@@ -8,10 +9,12 @@ const Navbar = () => {
   const auth = useAuth()
 
   return (
-    <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 bg-white">
+    <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-2 px-8 bg-white">
       <ul className="flex items-center gap-3">
         <li>
-          <NavItem to="/" classNameFunc={classNameFunc}> StarWars </NavItem>
+          <NavItem to="/" classNameFunc={classNameFunc}>
+            <img className="w-36 h-14 bg-transparent" src={logo} alt="StarWars" />
+          </NavItem>
         </li>
         <li>
           { auth.user &&

@@ -53,7 +53,7 @@ const Film = () => {
 
   return (
     <>
-      <div className="text-2xl text-white">{`Film: ${film.title}`}</div>
+      <div className="mt-6 text-2xl text-white">{`Film: ${film.title}`}</div>
       <div className="flex flex-col w-full items-center">
         <Card title="Details" info={film} fatherClass="w-3/4 text-center" />
       </div>
@@ -65,7 +65,7 @@ const Film = () => {
       </div>
       <div>
       <div className="text-xl text-white text-center py-6">People:</div>
-        <div className="flex flex-wrap w-full">
+        <div className="flex flex-wrap px-8 w-full">
           <CardList resourceList={peopleList} fatherClass="w-1/3" resourceName="people" />
         </div>
       </div>

@@ -52,19 +52,19 @@ const Planet = () => {
 
   return (
     <>
-      <div className="text-2xl text-white">{`Planet: ${currentPlanet.name}`}</div>
+      <div className=" mt-6 text-2xl text-white">{`Planet: ${currentPlanet.name}`}</div>
       <div className="flex flex-col w-full items-center">
         <Card title="Details" info={currentPlanet} fatherClass="w-1/2 text-center" />
       </div>
       <div>
         <div className="text-xl text-white text-center py-6">People:</div>
-        <div className="flex flex-wrap w-full">
+        <div className="flex flex-wrap px-8 w-full">
           <CardList resourceList={peopleList} fatherClass="w-1/3" resourceName="people" />
         </div>
       </div>
       <div>
       <div className="text-xl text-white text-center py-6">Films:</div>
-        <div className="flex flex-wrap w-full">
+        <div className="flex flex-wrap px-8 w-full">
           <CardList resourceList={filmList} fatherClass="w-1/2" resourceName="films" />
         </div>
       </div>
