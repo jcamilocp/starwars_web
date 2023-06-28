@@ -29,7 +29,11 @@ const Film = () => {
           setPlanetList(response.data.planets)
         }
       })
-      .catch(() => { auth.logoutUser(); });;
+      .catch((err) => {
+        if(err.response.status === 401){
+          auth.processSessionExpired();
+        }
+      });
   }, []);
 
   useEffect(() => {
@@ -39,7 +43,12 @@ const Film = () => {
           setPeopleList(response.data.people)
         }
       })
-      .catch(() => { auth.logoutUser(); });
+      .catch((err) => {
+        if(err.response.status === 401){
+          auth.logoutUser();
+          auth.setUpMessage({text: "Session Expired. Please Log in again.", type: auth.MESSAGE_TYPES.error });
+        }
+      });
   }, []);
 
   return (

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/auth";
 import { getPeople } from "../requests/client";
 import CardList from "../components/CardList";
@@ -7,7 +6,6 @@ import CardList from "../components/CardList";
 const People = () => {
   const [peopleList, setPeopleList] = useState([]);
   const auth = useAuth();
-  const navigate = useNavigate();
 
   useEffect(() => {
     getPeople(auth.token)
@@ -15,9 +13,12 @@ const People = () => {
         if(response.status === 200){
           setPeopleList(response.data.people)
         }
-      }).catch(() => {
-        auth.logoutUser();
-      });;
+      })
+      .catch((err) => {
+        if(err.response.status === 401){
+          auth.processSessionExpired();
+        }
+      });
   }, [])
 
   return (

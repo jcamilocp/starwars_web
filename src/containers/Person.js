@@ -17,7 +17,6 @@ const Person = () => {
       .then((response) => {
         if(response.status === 200){
           setPerson(response.data.people.data.attributes);
-          console.log(response.data.people);
         }
       });
   }, []);

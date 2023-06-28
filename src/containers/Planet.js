@@ -29,7 +29,11 @@ const Planet = () => {
           setPeopleList(response.data.people)
         }
       })
-      .catch(() => { auth.logoutUser(); });;
+      .catch((err) => {
+        if(err.response.status === 401){
+          auth.processSessionExpired();
+        }
+      });
   }, []);
 
   useEffect(() => {
@@ -39,7 +43,11 @@ const Planet = () => {
           setFilmList(response.data.films)
         }
       })
-      .catch(() => { auth.logoutUser(); });
+      .catch((err) => {
+        if(err.response.status === 401){
+          auth.processSessionExpired();
+        }
+      });
   }, []);
 
   return (

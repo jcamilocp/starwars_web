@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/auth";
 import { getFilms } from "../requests/client";
 import CardList from "../components/CardList";
@@ -7,7 +6,6 @@ import CardList from "../components/CardList";
 const Films = () => {
   const [filmList, setFilmList] = useState([]);
   const auth = useAuth();
-  const navigate = useNavigate();
 
   useEffect(() => {
     getFilms(auth.token)
@@ -17,7 +15,9 @@ const Films = () => {
         }
       })
       .catch((err) => {
-        auth.logoutUser();
+        if(err.response.status === 401){
+          auth.processSessionExpired();
+        }
       });
   }, [])
 

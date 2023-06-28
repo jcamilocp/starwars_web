@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/auth";
 import { getPlanets } from "../requests/client";
 import CardList from "../components/CardList";
@@ -7,7 +6,6 @@ import CardList from "../components/CardList";
 const Planets = () => {
   const [planetList, setPlanetList] = useState([]);
   const auth = useAuth();
-  const navigate = useNavigate();
 
   useEffect(() => {
     getPlanets(auth.token)
@@ -15,8 +13,11 @@ const Planets = () => {
         if(response.status === 200){
           setPlanetList(response.data.planets)
         }
-      }).catch(() => {
-        auth.logoutUser();
+      })
+      .catch((err) => {
+        if(err.response.status === 401){
+          auth.processSessionExpired();
+        }
       });
   }, []);
 
