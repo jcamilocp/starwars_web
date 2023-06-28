@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../components/auth";
 import Card from "../components/Card";
 import CardList from "../components/CardList";
-import { getFilm, getFilmPlanets, getFilmPeople } from "../requests/client";
+import { getFilm } from "../requests/client";
 
 const Film = () => {
   const [film, setFilm] = useState({});
@@ -17,38 +17,17 @@ const Film = () => {
     getFilm(params.filmId, auth.token)
       .then((response) => {
         if(response.status === 200){
-          setFilm(response.data.film)
-        }
-      });
-  }, []);
-
-  useEffect(() => {
-    getFilmPlanets(params.filmId, auth.token)
-      .then((response) => {
-        if(response.status === 200){
-          setPlanetList(response.data.planets)
+          const fetchedFilm = response.data.film.data.attributes
+          setFilm(fetchedFilm);
+          setPeopleList(fetchedFilm.people);
+          setPlanetList(fetchedFilm.planets);
         }
       })
       .catch((err) => {
         if(err.response.status === 401){
           auth.processSessionExpired();
         }
-      });
-  }, []);
-
-  useEffect(() => {
-    getFilmPeople(params.filmId, auth.token)
-      .then((response) => {
-        if(response.status === 200){
-          setPeopleList(response.data.people)
-        }
-      })
-      .catch((err) => {
-        if(err.response.status === 401){
-          auth.logoutUser();
-          auth.setUpMessage({text: "Session Expired. Please Log in again.", type: auth.MESSAGE_TYPES.error });
-        }
-      });
+      });;
   }, []);
 
   return (

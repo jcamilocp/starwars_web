@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../components/auth";
 import Card from "../components/Card";
 import CardList from "../components/CardList";
-import { getPlanet, getPlanetPeople, getPlanetFilms } from "../requests/client";
+import { getPlanet } from "../requests/client";
 
 const Planet = () => {
   const [currentPlanet, setCurrentPlanet] = useState({});
@@ -17,30 +17,10 @@ const Planet = () => {
     getPlanet(params.planetId, auth.token)
       .then((response) => {
         if(response.status === 200){
-          setCurrentPlanet(response.data.planet)
-        }
-      });
-  }, []);
-
-  useEffect(() => {
-    getPlanetPeople(params.planetId, auth.token)
-      .then((response) => {
-        if(response.status === 200){
-          setPeopleList(response.data.people)
-        }
-      })
-      .catch((err) => {
-        if(err.response.status === 401){
-          auth.processSessionExpired();
-        }
-      });
-  }, []);
-
-  useEffect(() => {
-    getPlanetFilms(params.planetId, auth.token)
-      .then((response) => {
-        if(response.status === 200){
-          setFilmList(response.data.films)
+          const fetchedPlanet = response.data.planet.data.attributes;
+          setCurrentPlanet(fetchedPlanet);
+          setFilmList(fetchedPlanet.films);
+          setPeopleList(fetchedPlanet.people);
         }
       })
       .catch((err) => {

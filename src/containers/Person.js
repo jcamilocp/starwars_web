@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../components/auth";
 import Card from "../components/Card";
 import CardList from "../components/CardList";
-import { getPerson, getPersonFilms } from "../requests/client";
+import { getPerson } from "../requests/client";
 
 const Person = () => {
   const [person, setPerson] = useState({});
@@ -16,19 +16,16 @@ const Person = () => {
     getPerson(params.personId, auth.token)
       .then((response) => {
         if(response.status === 200){
-          setPerson(response.data.people.data.attributes);
-        }
-      });
-  }, []);
-
-  useEffect(() => {
-    getPersonFilms(params.personId, auth.token)
-      .then((response) => {
-        if(response.status === 200){
-          setFilmList(response.data.films);
+          const fetchedPerson = response.data.people.data.attributes
+          setPerson(fetchedPerson);
+          setFilmList(fetchedPerson.films);
         }
       })
-      .catch(() => { auth.logoutUser(); });
+      .catch((err) => {
+        if(err.response.status === 401){
+          auth.processSessionExpired();
+        }
+      });
   }, []);
 
   return (
