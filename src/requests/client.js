@@ -17,33 +17,58 @@ const signup = (body) => axios.post(
   body
 );
 
-const planets = (authToken) => axios.get(
+const getPlanets = (authToken) => axios.get(
   `${HOST}/v1/planets`,
   { headers: { Authorization: authToken } }
 );
 
-const planet = (id, authToken) => axios.get(
+const getPlanet = (id, authToken) => axios.get(
   `${HOST}/v1/planets/${id}`,
   { headers: { Authorization: authToken } }
 );
 
-const people = (authToken) => axios.get(
+const getPlanetPeople = (id, authToken) => axios.get(
+  `${HOST}/v1/planets/${id}/people`,
+  { headers: { Authorization: authToken } }
+);
+
+const getPlanetFilms = (id, authToken) => axios.get(
+  `${HOST}/v1/planets/${id}/films`,
+  { headers: { Authorization: authToken } }
+);
+
+const getPeople = (authToken) => axios.get(
   `${HOST}/v1/people`,
   { headers: { Authorization: authToken } }
 );
 
-const person = (id, authToken) => axios.get(
+const getPerson = (id, authToken) => axios.get(
   `${HOST}/v1/people/${id}`,
   { headers: { Authorization: authToken } }
 );
 
-const films = (authToken) => axios.get(
+const getPersonFilms = (id, authToken) => axios.get(
+  `${HOST}/v1/people/${id}/films`,
+  { headers: { Authorization: authToken } }
+);
+
+const getFilms = (authToken) => axios.get(
   `${HOST}/v1/films`,
   { headers: { Authorization: authToken } }
 );
 
-const film = (id, authToken) => axios.get(
+const getFilm = (id, authToken) => axios.get(
   `${HOST}/v1/films/${id}`,
+  { headers: { Authorization: authToken } }
+);
+
+const getFilmPeople = (id, authToken) => axios.get(
+  `${HOST}/v1/films/${id}/people`,
+  { headers: { Authorization: authToken } }
+);
+
+const getFilmPlanets = (id, authToken) => axios.get(
+  `${HOST}/v1/films/${id}/planets`,
   { headers: { Authorization: authToken } }
 );
 
@@ -51,10 +76,15 @@ export {
   login,
   logout,
   signup,
-  planets,
-  planet,
-  people,
-  person,
-  films,
-  film,
+  getPlanets,
+  getPlanet,
+  getPlanetPeople,
+  getPlanetFilms,
+  getPeople,
+  getPerson,
+  getPersonFilms,
+  getFilms,
+  getFilm,
+  getFilmPeople,
+  getFilmPlanets,
 };

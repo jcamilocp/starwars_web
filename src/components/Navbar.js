@@ -37,9 +37,14 @@ const Navbar = () => {
         <li>
           {auth.user ? "👤" : ""}
         </li>
-        <li>
+          {!auth.user &&
+            <li className="bg-blue-600 hover:bg-blue-800 text-white p-2 rounded">
+              <NavItem to="/signup"> Sign Up </NavItem>
+            </li>
+          }
+        <li className="hover:underline hover:font-bold">
           {auth.user ?
-            <button onClick={() => {auth.logoutUser()}}>Logout</button> :
+            <button className="hover:underline" onClick={() => {auth.logoutUser()}}>Logout</button> :
             <NavItem to="/login" classNameFunc={undefined}> Login </NavItem>
           }
         </li>

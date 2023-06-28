@@ -1,5 +1,6 @@
 {
   "home": "/",
+  "signup": "/signup",
   "login": "/login",
   "planets": "/planets",
   "people": "/people",

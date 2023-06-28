@@ -1,9 +1,9 @@
-const Card = ({title, info}) => {
+const Card = ({title, info, clickHandler, fatherClass}) => {
   return (
-	<div className="w-1/3">
-    <div className=" bg-white p-4 m-3">
+	<div className={fatherClass} onClick={clickHandler}>
+    <div className=" bg-white hover:bg-gray-200 p-4 m-3">
       <div className="text-lg font-bold"> {title} </div>
-        { Object.keys(info).map((key) => {
+        { Object.keys(info).filter((key) => key !== 'planet' && key !== 'id' ).map((key) => {
           return <div key={`${key}-${info.id}`}>{`${key}: ${info[key]}`}</div>
         })}
       </div>

@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
-import Card from "../components/Card";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/auth";
-import { films } from "../requests/client";
+import { getFilms } from "../requests/client";
+import CardList from "../components/CardList";
 
 const Films = () => {
   const [filmList, setFilmList] = useState([]);
   const auth = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    films(auth.token)
+    getFilms(auth.token)
       .then((response) => {
         if(response.status === 200){
           setFilmList(response.data.films)
         }
+      })
+      .catch((err) => {
+        navigate("/login");
       });
-  })
+  }, [])
 
   return (
     <div className="w-full px-16">
       <div className="text-center text-4xl text-white pt-4">Films</div>
       <div className="py-4 flex flex-wrap items-center w-full">
-        {
-          filmList.map((film) => <Card key={film.id} title={film.name} info={film} ></Card>)
-        }
+        <CardList resourceList={filmList} fatherClass="w-1/2" resourceName="films" />
       </div>
     </div>
   );
