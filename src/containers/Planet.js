@@ -29,7 +29,7 @@ const Planet = () => {
           setPeopleList(response.data.people)
         }
       })
-      .catch((err) => { console.log(err) });;
+      .catch(() => { auth.logoutUser(); });;
   }, []);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Planet = () => {
           setFilmList(response.data.films)
         }
       })
-      .catch((err) => { console.log(err) });
+      .catch(() => { auth.logoutUser(); });
   }, []);
 
   return (

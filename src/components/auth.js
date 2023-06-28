@@ -1,6 +1,7 @@
-import { createContext, useContext, useState } from "react";
-import { login, logout, signup } from "../requests/client";
+import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { login, logout, signup } from "../requests/client";
+import { addSession, deleteSession, findSession } from "../db/sessions";
 
 const AuthContext = createContext();
 
@@ -8,6 +9,16 @@ const AuthProvider = ({children}) => {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    findSession().then((result) => {
+      const dbUser = result[0];
+      if(dbUser){
+        setUser(dbUser);
+        setToken(dbUser.token);
+      }
+    })
+  }, []);
 
   const signUpUser = ({email, password, passwordConfirmation}) => {
     signup({user: {email, password, password_confirmation: passwordConfirmation}})
@@ -22,9 +33,14 @@ const AuthProvider = ({children}) => {
     login({user: {email, password}})
       .then((response) => {
         if(response.status === 200){
-          setUser(response.data.status.data.user);
-          setToken(response.headers.authorization);
-          navigate('/');
+          const receivedUser = response.data.status.data.user;
+          const receivedToken = response.headers.authorization;
+          addSession({ email: receivedUser.email, token: receivedToken})
+            .then((dbUser) => {
+              setUser(dbUser);
+              setToken(dbUser.token);
+              navigate('/');
+            });
         }
       });
   };
@@ -33,6 +49,7 @@ const AuthProvider = ({children}) => {
     logout(token)
       .then((response) => {
         if(response.status === 200){
+          deleteSession(user.id);
           setUser(null);
           setToken(null);
           navigate('/login');

@@ -15,8 +15,8 @@ const Planets = () => {
         if(response.status === 200){
           setPlanetList(response.data.planets)
         }
-      }).catch((err) => {
-        navigate("/login");
+      }).catch(() => {
+        auth.logoutUser();
       });
   }, []);
 

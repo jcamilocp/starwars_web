@@ -29,7 +29,7 @@ const Person = () => {
           setFilmList(response.data.films);
         }
       })
-      .catch((err) => { console.log(err) });
+      .catch(() => { auth.logoutUser(); });
   }, []);
 
   return (

@@ -15,8 +15,8 @@ const People = () => {
         if(response.status === 200){
           setPeopleList(response.data.people)
         }
-      }).catch((err) => {
-        navigate("/login");
+      }).catch(() => {
+        auth.logoutUser();
       });;
   }, [])
 

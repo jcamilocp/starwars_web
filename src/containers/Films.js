@@ -17,7 +17,7 @@ const Films = () => {
         }
       })
       .catch((err) => {
-        navigate("/login");
+        auth.logoutUser();
       });
   }, [])
 
