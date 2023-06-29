@@ -36,8 +36,8 @@ const Person = () => {
           <Card title="Planet" info={person.planet} fatherClass="w-1/2 text-center" />
         }
       </div>
-      <div>
-      <div className="text-xl text-white text-center py-6">Films:</div>
+      <div className="w-full p-8">
+        <div className="text-xl text-white text-center py-6">Films:</div>
         <div className="flex flex-wrap px-8 w-full">
           <CardList resourceList={films} fatherClass="w-1/2" resourceName="films" />
         </div>

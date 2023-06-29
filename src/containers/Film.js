@@ -36,14 +36,14 @@ const Film = () => {
       <div className="flex flex-col w-full items-center">
         <Card title="Details" info={film} fatherClass="w-3/4 text-center" />
       </div>
-      <div>
+      <div className="w-full p-8">
         <div className="text-xl text-white text-center py-6">Planets:</div>
         <div className="flex flex-wrap w-full">
           <CardList resourceList={planets} fatherClass="w-1/3" resourceName="planets" />
         </div>
       </div>
-      <div>
-      <div className="text-xl text-white text-center py-6">People:</div>
+      <div className="w-full p-8">
+        <div className="text-xl text-white text-center py-6">People:</div>
         <div className="flex flex-wrap px-8 w-full">
           <CardList resourceList={people} fatherClass="w-1/3" resourceName="people" />
         </div>
