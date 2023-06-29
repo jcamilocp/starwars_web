@@ -15,7 +15,12 @@ const CardList = ({resourceList, fatherClass, resourceName}) => {
   return (
     <>
       {resourceList.map(
-        (resource) => <Card key={resource.id} title={resolveTitle(resource)} info={resource} fatherClass={fatherClass} clickHandler={() => handleClick(resource.id)}></Card>
+        (resource) =>
+          <Card key={resource.id}
+                title={resolveTitle(resource)}
+                info={resource} fatherClass={fatherClass}
+                clickHandler={() => handleClick(resource.id)}
+          ></Card>
         )
       }
     </>

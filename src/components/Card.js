@@ -13,7 +13,7 @@ const Card = ({title, info, clickHandler, fatherClass}) => {
   };
 
   const toTitleCase = (s) => (
-    s.replace(/^_*(.)|_+(.)/g, (s, c, d) => c ? c.toUpperCase() : ' ' + d.toUpperCase())
+    s.replace(/^_*(.)|_+(.)/g, (s, c, d) => c ? c.toUpperCase() : " " + d.toUpperCase())
   );
 
   return (

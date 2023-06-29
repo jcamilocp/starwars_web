@@ -10,7 +10,6 @@ const Input = ({label, type, name, clazz, value, setValue, required = false}) =>
         className="border border-solid outline-1 border-blue-100"
         onChange={e => setValue(e.target.value)}
         />
-      {/*errorFuc(name)*/}
     </div>
   );
 };

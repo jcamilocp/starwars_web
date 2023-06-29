@@ -20,7 +20,9 @@ const Layout = ({children}) => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-16 w-full min-h-screen h-full bg-cover bg-no-repeat" style={{ backgroundImage: `url(${background})` }}>
+    <div className="flex flex-col items-center mt-16 w-full min-h-screen h-full bg-cover bg-no-repeat"
+         style={{ backgroundImage: `url(${background})` }}
+    >
       {children}
       {
         auth.message.text &&

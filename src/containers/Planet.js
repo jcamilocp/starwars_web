@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../components/auth";
+import { getPlanet } from "../requests/client";
 import Card from "../components/Card";
 import CardList from "../components/CardList";
-import { getPlanet } from "../requests/client";
 
 const Planet = () => {
-  const [currentPlanet, setCurrentPlanet] = useState({});
-  const [peopleList, setPeopleList] = useState([]);
-  const [filmList, setFilmList] = useState([]);
+  const [planet, setPlanet] = useState({});
+  const [people, setPeople] = useState([]);
+  const [films, setFilms] = useState([]);
 
   const auth = useAuth();
   const params = useParams();
@@ -18,34 +18,33 @@ const Planet = () => {
       .then((response) => {
         if(response.status === 200){
           const fetchedPlanet = response.data.planet.data.attributes;
-          setCurrentPlanet(fetchedPlanet);
-          setFilmList(fetchedPlanet.films);
-          setPeopleList(fetchedPlanet.people);
+          setPlanet(fetchedPlanet);
+          setFilms(fetchedPlanet.films);
+          setPeople(fetchedPlanet.people);
         }
       })
       .catch((err) => {
-        if(err.response.status === 401){
+        if(err.response.status === 401)
           auth.processSessionExpired();
-        }
       });
   }, []);
 
   return (
     <>
-      <div className=" mt-6 text-2xl text-white">{`Planet: ${currentPlanet.name}`}</div>
+      <div className=" mt-6 text-2xl text-white">{`Planet: ${planet.name}`}</div>
       <div className="flex flex-col w-full items-center">
-        <Card title="Details" info={currentPlanet} fatherClass="w-1/2 text-center" />
+        <Card title="Details" info={planet} fatherClass="w-1/2 text-center" />
       </div>
       <div>
         <div className="text-xl text-white text-center py-6">People:</div>
         <div className="flex flex-wrap px-8 w-full">
-          <CardList resourceList={peopleList} fatherClass="w-1/3" resourceName="people" />
+          <CardList resourceList={people} fatherClass="w-1/3" resourceName="people" />
         </div>
       </div>
       <div>
       <div className="text-xl text-white text-center py-6">Films:</div>
         <div className="flex flex-wrap px-8 w-full">
-          <CardList resourceList={filmList} fatherClass="w-1/2" resourceName="films" />
+          <CardList resourceList={films} fatherClass="w-1/2" resourceName="films" />
         </div>
       </div>
     </>

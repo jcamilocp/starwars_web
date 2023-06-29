@@ -1,5 +1,5 @@
-import NavItem from "./NavItem"
 import { useAuth } from "./auth"
+import NavItem from "./NavItem"
 import logo from "../assets/images/logo.svg"
 
 const Navbar = () => {

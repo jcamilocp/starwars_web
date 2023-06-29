@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../components/auth";
+import { getPerson } from "../requests/client";
 import Card from "../components/Card";
 import CardList from "../components/CardList";
-import { getPerson } from "../requests/client";
 
 const Person = () => {
   const [person, setPerson] = useState({});
-  const [filmList, setFilmList] = useState([]);
+  const [films, setFilms] = useState([]);
 
   const auth = useAuth();
   const params = useParams();
@@ -18,13 +18,12 @@ const Person = () => {
         if(response.status === 200){
           const fetchedPerson = response.data.people.data.attributes
           setPerson(fetchedPerson);
-          setFilmList(fetchedPerson.films);
+          setFilms(fetchedPerson.films);
         }
       })
       .catch((err) => {
-        if(err.response.status === 401){
+        if(err.response.status === 401)
           auth.processSessionExpired();
-        }
       });
   }, []);
 
@@ -40,7 +39,7 @@ const Person = () => {
       <div>
       <div className="text-xl text-white text-center py-6">Films:</div>
         <div className="flex flex-wrap px-8 w-full">
-          <CardList resourceList={filmList} fatherClass="w-1/2" resourceName="films" />
+          <CardList resourceList={films} fatherClass="w-1/2" resourceName="films" />
         </div>
       </div>
     </>

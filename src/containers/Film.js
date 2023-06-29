@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../components/auth";
+import { getFilm } from "../requests/client";
 import Card from "../components/Card";
 import CardList from "../components/CardList";
-import { getFilm } from "../requests/client";
 
 const Film = () => {
   const [film, setFilm] = useState({});
-  const [planetList, setPlanetList] = useState([]);
-  const [peopleList, setPeopleList] = useState([]);
+  const [planets, setPlanets] = useState([]);
+  const [people, setPeople] = useState([]);
 
   const auth = useAuth();
   const params = useParams();
@@ -19,8 +19,8 @@ const Film = () => {
         if(response.status === 200){
           const fetchedFilm = response.data.film.data.attributes
           setFilm(fetchedFilm);
-          setPeopleList(fetchedFilm.people);
-          setPlanetList(fetchedFilm.planets);
+          setPeople(fetchedFilm.people);
+          setPlanets(fetchedFilm.planets);
         }
       })
       .catch((err) => {
@@ -39,13 +39,13 @@ const Film = () => {
       <div>
         <div className="text-xl text-white text-center py-6">Planets:</div>
         <div className="flex flex-wrap w-full">
-          <CardList resourceList={planetList} fatherClass="w-1/3" resourceName="planets" />
+          <CardList resourceList={planets} fatherClass="w-1/3" resourceName="planets" />
         </div>
       </div>
       <div>
       <div className="text-xl text-white text-center py-6">People:</div>
         <div className="flex flex-wrap px-8 w-full">
-          <CardList resourceList={peopleList} fatherClass="w-1/3" resourceName="people" />
+          <CardList resourceList={people} fatherClass="w-1/3" resourceName="people" />
         </div>
       </div>
     </>

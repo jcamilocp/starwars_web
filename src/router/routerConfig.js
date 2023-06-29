@@ -1,6 +1,7 @@
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import routes from './routes.json';
+import { AuthProvider } from '../components/auth';
 import Navbar from '../components//Navbar';
 import Home from '../containers/Home';
 import Login from '../containers/Login';
@@ -12,7 +13,6 @@ import Person from '../containers/Person';
 import Films from '../containers/Films';
 import Film from '../containers/Film';
 import Layout from '../components/Layout';
-import { AuthProvider } from '../components/auth';
 
 const RouteConfig = () => {
   return (

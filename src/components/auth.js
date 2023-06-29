@@ -32,7 +32,7 @@ const AuthProvider = ({children}) => {
         const messageText = response.data.status.message;
         if(response.status === 200){
           setMessage({text: `${messageText} Now you can log in.`, type: MESSAGE_TYPES.success});
-          navigate('/login');
+          navigate("/login");
         }
       })
       .catch((err) => {
@@ -57,7 +57,7 @@ const AuthProvider = ({children}) => {
               setUser(dbUser);
               setToken(dbUser.token);
               setMessage({text: messageText, type: MESSAGE_TYPES.success});
-              navigate('/');
+              navigate("/");
             });
         }
       })
@@ -79,7 +79,7 @@ const AuthProvider = ({children}) => {
             setUser(null);
             setToken(null);
             setMessage({text: response.data.message, type: MESSAGE_TYPES.success});
-            navigate('/login');
+            navigate("/login");
           });
         }
       })
